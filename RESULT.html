@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Result</title>
+    <link rel="stylesheet" href="assets/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+
+<body>
+
+    <div class="container py-4">
+        <div class="row">
+            <div class="col-auto"> <button type="button" onclick="reset()" class="btn btn-primary rounded-pill">Back to
+                    home</button>
+            </div>
+        </div>
+        <h1 class="text-center mb-4">Result</h1>
+        <h4 class="text-center mb-4 text-danger" id="finalR">Result</h4>
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div id="result" class="text-center"></div>
+                <div class="progress-container mb-4">
+                    <div class="progress-bar"></div>
+                </div>
+                <ul class="p-0 list-unstyled">
+                    <li>0 - 20 : <span class="s1"></span></li>
+                    <li>20 - 40 : <span class="s2"></span></li>
+                    <li>40 - 60 : <span class="s3"></span></li>
+                    <li>60 - 80 : <span class="s4"></span></li>
+                    <li>80 and Above : <span class="s5"></span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- js -->
+    <script src="assets/jquery.min.js"></script>
+    <script src="assets/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var dataSet = JSON.parse(localStorage.getItem('dataList'));
+            var total = 0;
+            dataSet?.forEach(function (item) {
+                total += parseFloat(item);
+            });
+            $("#result").html(total + "%");
+            var progressBar = $('.progress-bar');
+            var width = 0;
+            var maxWidth = total;
+            var duration = 500;
+            var intervalId = null;
+            function animateProgressBar() {
+                clearInterval(intervalId);
+                width = 0;
+                progressBar.css('width', width + '%');
+                intervalId = setInterval(function () {
+                    if (width >= maxWidth) {
+                        clearInterval(intervalId);
+                    } else {
+                        width++;
+                        progressBar.css('width', width + '%');
+                    }
+                }, duration / maxWidth);
+            }
+            animateProgressBar();
+
+            var checkName = localStorage.getItem('name');
+            if (checkName === "anxiety") {
+                $(".list-unstyled .s1").text("No Anxiety");
+                $(".list-unstyled .s2").text("Mild Anxiety");
+                $(".list-unstyled .s3").text("Moderate Anxiety");
+                $(".list-unstyled .s4").text("Moderate to Severe Anxiety");
+                $(".list-unstyled .s5").text("Severe Anxiety");
+                switch (true) {
+                    case total <= 20:
+                        $("#finalR").text("No Anxiety");
+                        break;
+                    case total <= 40:
+                        $("#finalR").text("Mild Anxiety");
+                        break;
+                    case total <= 60:
+                        $("#finalR").text("Moderate Anxiety");
+                        break;
+                    case total <= 80:
+                        $("#finalR").text("Moderate to Severe Anxiety");
+                        break;
+                    case total <= 100:
+                        $("#finalR").text("Severe Anxiety");
+                        break;
+                    default:
+                        $("#finalR").text("All good");
+                };
+            }
+            if (checkName === "bipolar") {
+                $(".list-unstyled .s1").text("No Bipolar");
+                $(".list-unstyled .s2").text("Mild Bipolar");
+                $(".list-unstyled .s3").text("Moderate Bipolar");
+                $(".list-unstyled .s4").text("Moderate to Severe Bipolar");
+                $(".list-unstyled .s5").text("Severe Bipolar");
+                switch (true) {
+                    case total <= 20:
+                        $("#finalR").text("No Bipolar");
+                        break;
+                    case total <= 40:
+                        $("#finalR").text("Mild Bipolar");
+                        break;
+                    case total <= 60:
+                        $("#finalR").text("Moderate Bipolar");
+                        break;
+                    case total <= 80:
+                        $("#finalR").text("Moderate to Severe Bipolar");
+                        break;
+                    case total <= 100:
+                        $("#finalR").text("Severe Bipolar");
+                        break;
+                    default:
+                        $("#finalR").text("All good");
+                };
+            }
+            if (checkName === "depression") {
+                $(".list-unstyled .s1").text("No Depression");
+                $(".list-unstyled .s2").text("Mild Depression");
+                $(".list-unstyled .s3").text("Moderate Depression");
+                $(".list-unstyled .s4").text("Moderate to Severe Depression");
+                $(".list-unstyled .s5").text("Severe Depression");
+                switch (true) {
+                    case total <= 20:
+                        $("#finalR").text("No Depression");
+                        break;
+                    case total <= 40:
+                        $("#finalR").text("Mild Depression");
+                        break;
+                    case total <= 60:
+                        $("#finalR").text("Moderate Depression");
+                        break;
+                    case total <= 80:
+                        $("#finalR").text("Moderate to Severe Depression");
+                        break;
+                    case total <= 100:
+                        $("#finalR").text("Severe Depression");
+                        break;
+                    default:
+                        $("#finalR").text("All good");
+                };
+            }
+            if (checkName === "drugaddict") {
+                $(".list-unstyled .s1").text("No Drugaddict");
+                $(".list-unstyled .s2").text("Mild Drugaddict");
+                $(".list-unstyled .s3").text("Moderate Drugaddict");
+                $(".list-unstyled .s4").text("Moderate to Severe Drugaddict");
+                $(".list-unstyled .s5").text("Severe Drugaddict");
+                switch (true) {
+                    case total <= 20:
+                        $("#finalR").text("No Drugaddict");
+                        break;
+                    case total <= 40:
+                        $("#finalR").text("Mild Drugaddict");
+                        break;
+                    case total <= 60:
+                        $("#finalR").text("Moderate Drugaddict");
+                        break;
+                    case total <= 80:
+                        $("#finalR").text("Moderate to Severe Drugaddict");
+                        break;
+                    case total <= 100:
+                        $("#finalR").text("Severe Drugaddict");
+                        break;
+                    default:
+                        $("#finalR").text("All good");
+                };
+            }
+            if (checkName === "pyschosis") {
+                $(".list-unstyled .s1").text("No Psychosis");
+                $(".list-unstyled .s2").text("Mild Psychosis");
+                $(".list-unstyled .s3").text("Moderate Psychosis");
+                $(".list-unstyled .s4").text("Moderate to Severe Psychosis");
+                $(".list-unstyled .s5").text("Severe Psychosis");
+                switch (true) {
+                    case total <= 20:
+                        $("#finalR").text("No Psychosis");
+                        break;
+                    case total <= 40:
+                        $("#finalR").text("Mild Psychosis");
+                        break;
+                    case total <= 60:
+                        $("#finalR").text("Moderate Psychosis");
+                        break;
+                    case total <= 80:
+                        $("#finalR").text("Moderate to Severe Psychosis");
+                        break;
+                    case total <= 100:
+                        $("#finalR").text("Severe Psychosis");
+                        break;
+                    default:
+                        $("#finalR").text("All good");
+                };
+            }
+            if (checkName === "selfesteem") {
+                $(".list-unstyled .s1").text("No Selfesteem");
+                $(".list-unstyled .s2").text("Mild Selfesteem");
+                $(".list-unstyled .s3").text("Moderate Selfesteem");
+                $(".list-unstyled .s4").text("Moderate to Severe Selfesteem");
+                $(".list-unstyled .s5").text("Severe Selfesteem");
+                switch (true) {
+                    case total <= 20:
+                        $("#finalR").text("No Selfesteem");
+                        break;
+                    case total <= 40:
+                        $("#finalR").text("Mild Selfesteem");
+                        break;
+                    case total <= 60:
+                        $("#finalR").text("Moderate Selfesteem");
+                        break;
+                    case total <= 80:
+                        $("#finalR").text("Moderate to Severe Selfesteem");
+                        break;
+                    case total <= 100:
+                        $("#finalR").text("Severe Selfesteem");
+                        break;
+                    default:
+                        $("#finalR").text("All good");
+                }
+            }
+        })
+        function reset() {
+            localStorage.clear();
+            window.location.href = "index.html"
+        }
+    </script>
+</body>
+
+</html>

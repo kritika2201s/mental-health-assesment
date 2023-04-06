@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BIPOLAR</title>
+        <link rel="stylesheet" href="assets/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/style.css">
+    </head>
+    <body>
+
+        <div class="container">
+            <h1 class="text-center my-5">BIPOLAR</h1>
+            <div id="quizzSet">
+                <!-- data rendering here -->
+            </div>           
+        </div>
+        <!-- js -->
+        <script src="assets/jquery.min.js"></script>
+        <script src="assets/bootstrap.min.js"></script>
+
+        <script>
+        var arr=["Have you ever felt like hurting yourself in any way?","Have you ever much more talkative or spoke faster than usual?","Have you ever feel so irritable that you shouted at people or started fights and arguments?","Have you ever feel happy and sad at the same time?","Have you ever feel no interest or more than usual pleasure in doing things?"];
+        $(document).ready(function(){
+            var result=arr.map(function(item,i){
+            return `<div class="row w-50 mx-auto" id="quest"><div class="col-12 mb-4"><h5 class="mb-0">Q.${i+1}&nbsp;${item}</h5></div><div class="col-6 mb-3"><span class="p-2 d-inline-block cursor" dataval="20">(A) All of the time</span></div><div class="col-6 mb-3"><span class="p-2 d-inline-block cursor" dataval="10">(B) Most of the time</span></div><div class="col-6 mb-3"> <span class="p-2 d-inline-block cursor" dataval="5">(C) Some of the time</span></div><div class="col-6 mb-3"><span class="p-2 d-inline-block cursor" dataval="0">(D) Never</span></div></div>`;
+            })
+           $("#quizzSet").html(result);
+           var pitems = $('#quizzSet #quest');
+           var citems = $('#quizzSet #quest span');
+           var initialVal = 0;
+           pitems.hide(); 
+           pitems.eq(initialVal).show();
+           var emptyArr = [];
+           var prevValue = null;
+           citems.click(function() {
+           $(pitems).hide();
+           initialVal++;
+           if (initialVal >= pitems.length) {
+            setTimeout(function(){
+            window.location.href="RESULT.html";
+            },500)}
+           pitems.eq(initialVal).show();
+           var getData = $(this).attr("dataval");
+           emptyArr.push(getData);
+           localStorage.setItem("dataList",JSON.stringify(emptyArr));
+           localStorage.setItem("name","bipolar");
+          })
+          });
+
+
+    </script>
+        <!--Do you feel more nervous and anxious than usual?
+        Do you feel afraid for no reason at all?
+        Do you get upset easily or feel panicky
+        Do your arms and legs shake and tremble
+        Do you have fainting spells or feel like it? -->
+    </body>
+</html>
